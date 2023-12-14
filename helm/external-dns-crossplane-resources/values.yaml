@@ -1,0 +1,6 @@
+name: external-dns-crossplane-resources
+serviceType: managed
+
+project:
+  branch: "[[ .Branch ]]"
+  commit: "[[ .SHA ]]"

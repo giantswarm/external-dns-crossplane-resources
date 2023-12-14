@@ -1,0 +1,53 @@
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  name: {{.ClusterId}}-external-dns
+  namespace: default
+  labels:
+      {{- include "labels.common" . | nindent 4 }}
+spec:
+  providerConfigRef:
+    name: {{.ClusterId}}
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Federated": "arn:aws:iam::{{.AccountID}}:oidc-provider/irsa.{{.ClusterName}}.{{.BaseDomain}}"
+            },
+            "Action": "sts:AssumeRoleWithWebIdentity",
+            "Condition": {
+              "StringEquals": {
+                "irsa.{{.ClusterName}}.{{.BaseDomain}}:sub": "system:serviceaccount:kube-system:external-dns"
+              }
+            }
+          }
+        ]
+      }
+    inlinePolicy:
+      - name: external-dns-policy
+        policy: |
+          {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Action": "route53:ChangeResourceRecordSets",
+                "Resource": [
+                  "arn:aws:route53:::hostedzone/*"
+                ],
+                "Effect": "Allow"
+              },
+              {
+                "Action": [
+                  "route53:ListHostedZones",
+                  "route53:ListResourceRecordSets",
+                  "route53:ListTagsForResource"
+                ],
+                "Resource": "*",
+                "Effect": "Allow"
+              }
+            ]
+          }
