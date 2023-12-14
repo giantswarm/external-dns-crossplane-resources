@@ -16,12 +16,12 @@ spec:
           {
             "Effect": "Allow",
             "Principal": {
-              "Federated": "arn:aws:iam::{{.accountID}}:oidc-provider/irsa.{{.ClusterName}}.{{.baseDomain}}"
+              "Federated": "arn:aws:iam::{{.accountID}}:oidc-provider/irsa.{{.clusterName}}.{{.baseDomain}}"
             },
             "Action": "sts:AssumeRoleWithWebIdentity",
             "Condition": {
               "StringEquals": {
-                "irsa.{{.alusterName}}.{{.baseDomain}}:sub": "system:serviceaccount:kube-system:external-dns"
+                "irsa.{{.clusterName}}.{{.baseDomain}}:sub": "system:serviceaccount:kube-system:external-dns"
               }
             }
           }
