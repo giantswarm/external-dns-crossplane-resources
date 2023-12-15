@@ -23,7 +23,7 @@ spec:
             },
             "Action": "sts:AssumeRoleWithWebIdentity",
             "Condition": {
-              "StringEquals": {
+              "StringLike": {
                 "irsa.{{.Values.baseDomain}}:sub": "system:serviceaccount:*:*external-dns*"
               }
             }
