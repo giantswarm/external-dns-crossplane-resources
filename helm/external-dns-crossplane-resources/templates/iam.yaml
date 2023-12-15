@@ -9,6 +9,9 @@ spec:
   providerConfigRef:
     name: {{.Values.clusterName}}
   forProvider:
+    tags:
+      giantswarm.io/cluster: {{.Values.clusterName}}
+      sigs.k8s.io/cluster-api-provider-aws/cluster/{{.Values.clusterName}}: owned
     assumeRolePolicy: |
       {
         "Version": "2012-10-17",
@@ -16,12 +19,12 @@ spec:
           {
             "Effect": "Allow",
             "Principal": {
-              "Federated": "arn:aws:iam::{{.Values.accountID}}:oidc-provider/irsa.{{.Values.clusterName}}.{{.Values.baseDomain}}"
+              "Federated": "arn:aws:iam::{{.Values.accountID}}:oidc-provider/irsa.{{.Values.baseDomain}}"
             },
             "Action": "sts:AssumeRoleWithWebIdentity",
             "Condition": {
               "StringEquals": {
-                "irsa.{{.Values.clusterName}}.{{.Values.baseDomain}}:sub": "system:serviceaccount:kube-system:external-dns"
+                "irsa.{{.Values.baseDomain}}:sub": "system:serviceaccount:kube-system:external-dns"
               }
             }
           }
