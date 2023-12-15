@@ -1,6 +1,10 @@
 name: external-dns-crossplane-resources
 serviceType: managed
 
+clusterName: ""
+accountID: ""
+baseDomain: ""
+
 project:
   branch: "[[ .Branch ]]"
   commit: "[[ .SHA ]]"

@@ -1,8 +1,8 @@
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
-  name: {{.ClusterId}}-external-dns
-  namespace: default
+  name: {{.Values.clusterName}}-external-dns
+  namespace: {{.ReleaseNamespace}}
   labels:
       {{- include "labels.common" . | nindent 4 }}
 spec:
@@ -16,12 +16,12 @@ spec:
           {
             "Effect": "Allow",
             "Principal": {
-              "Federated": "arn:aws:iam::{{.accountID}}:oidc-provider/irsa.{{.clusterName}}.{{.baseDomain}}"
+              "Federated": "arn:aws:iam::{{.Values.accountID}}:oidc-provider/irsa.{{.Values.clusterName}}.{{.Values.baseDomain}}"
             },
             "Action": "sts:AssumeRoleWithWebIdentity",
             "Condition": {
               "StringEquals": {
-                "irsa.{{.clusterName}}.{{.baseDomain}}:sub": "system:serviceaccount:kube-system:external-dns"
+                "irsa.{{.Values.clusterName}}.{{.Values.baseDomain}}:sub": "system:serviceaccount:kube-system:external-dns"
               }
             }
           }
