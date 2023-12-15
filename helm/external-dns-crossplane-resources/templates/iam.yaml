@@ -24,7 +24,7 @@ spec:
             "Action": "sts:AssumeRoleWithWebIdentity",
             "Condition": {
               "StringEquals": {
-                "irsa.{{.Values.baseDomain}}:sub": "system:serviceaccount:kube-system:external-dns"
+                "irsa.{{.Values.baseDomain}}:sub": "system:serviceaccount:*:*external-dns*"
               }
             }
           }
