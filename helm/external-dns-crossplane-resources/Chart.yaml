@@ -5,9 +5,7 @@ name: external-dns-crossplane-resources
 # Please describe what the app provides in a sentence or two.
 description: Crossplane Resources for External DNS
 home: https://github.com/giantswarm/external-dns-crossplane-resources
-# If you have an icon/logo, you should add it to https://github.com/giantswarm/web-assets
-# and set the final URL as a value here and uncomment.
-# icon: https://s.giantswarm.io/app-icons/example/1/light.svg
+icon: https://s.giantswarm.io/app-icons/aws/2/light.svg
 sources:
   - https://github.com/giantswarm/external-dns-crossplane-resources
 version: 0.1.5
