@@ -11,3 +11,7 @@ sources:
 version: 0.1.6
 annotations:
   application.giantswarm.io/team: phoenix
+  io.giantswarm.application.audience: giantswarm
+  io.giantswarm.application.managed: "true"
+  io.giantswarm.application.team: phoenix
+  io.giantswarm.application.restrictions.compatible-providers: "aws"
