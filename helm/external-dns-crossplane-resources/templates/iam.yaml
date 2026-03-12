@@ -1,17 +1,17 @@
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
-  name: {{.Values.clusterName}}-external-dns
-  namespace: {{.ReleaseNamespace}}
+  name: {{ .Values.clusterName }}-external-dns
+  namespace: {{ .Release.Namespace }}
   labels:
-      {{- include "labels.common" . | nindent 4 }}
+    {{- include "labels.common" . | nindent 4 }}
 spec:
   providerConfigRef:
-    name: {{.Values.clusterName}}
+    name: {{ .Values.clusterName }}
   forProvider:
     tags:
-      giantswarm.io/cluster: {{.Values.clusterName}}
-      sigs.k8s.io/cluster-api-provider-aws/cluster/{{.Values.clusterName}}: owned
+      giantswarm.io/cluster: {{ .Values.clusterName }}
+      sigs.k8s.io/cluster-api-provider-aws/cluster/{{ .Values.clusterName }}: owned
     assumeRolePolicy: |
       {
         "Version": "2012-10-17",
@@ -19,12 +19,12 @@ spec:
           {
             "Effect": "Allow",
             "Principal": {
-              "Federated": "arn:aws:iam::{{.Values.accountID}}:oidc-provider/irsa.{{.Values.baseDomain}}"
+              "Federated": "arn:aws:iam::{{ .Values.accountID }}:oidc-provider/irsa.{{ .Values.baseDomain }}"
             },
             "Action": "sts:AssumeRoleWithWebIdentity",
             "Condition": {
               "StringLike": {
-                "irsa.{{.Values.baseDomain}}:sub": "system:serviceaccount:*:*external-dns*"
+                "irsa.{{ .Values.baseDomain }}:sub": "system:serviceaccount:*:*external-dns*"
               }
             }
           }

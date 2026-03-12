@@ -1,10 +1,5 @@
-name: external-dns-crossplane-resources
-serviceType: managed
-
+# Values are injected at deploy time via the App CR's extraConfigs
+# referencing the shared {clusterID}-crossplane-config ConfigMap
 clusterName: ""
 accountID: ""
 baseDomain: ""
-
-project:
-  branch: "[[ .Branch ]]"
-  commit: "[[ .SHA ]]"
