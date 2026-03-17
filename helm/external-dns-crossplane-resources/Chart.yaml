@@ -5,4 +5,4 @@ home: https://github.com/giantswarm/external-dns-crossplane-resources
 icon: https://s.giantswarm.io/app-icons/crossplane/1/dark.svg
 version: 0.1.6
 annotations:
-  application.giantswarm.io/team: cabbage
+  io.giantswarm.application.team: cabbage

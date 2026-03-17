@@ -11,6 +11,7 @@ spec:
   forProvider:
     tags:
       giantswarm.io/cluster: {{ .Values.clusterName }}
+      managed-by: "external-dns-crossplane-resources"
       sigs.k8s.io/cluster-api-provider-aws/cluster/{{ .Values.clusterName }}: owned
     assumeRolePolicy: |
       {
