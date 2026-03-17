@@ -1,5 +1,4 @@
-# Values are injected at deploy time via the App CR's extraConfigs
-# referencing the shared {clusterID}-crossplane-config ConfigMap
+# Values are inlined by cluster-aws in the HelmRelease spec
 clusterName: ""
 accountID: ""
 baseDomain: ""
