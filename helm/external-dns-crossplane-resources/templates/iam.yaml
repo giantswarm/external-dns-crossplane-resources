@@ -17,18 +17,21 @@ spec:
       {
         "Version": "2012-10-17",
         "Statement": [
-          {
+          {{- $oidcDomains := include "oidcDomains" . | fromJsonArray -}}
+          {{- range $index, $oidcDomain := $oidcDomains -}}
+          {{- if not (eq $index 0) }}, {{ end }}{
             "Effect": "Allow",
             "Principal": {
-              "Federated": "arn:aws:iam::{{ .Values.accountID }}:oidc-provider/irsa.{{ .Values.baseDomain }}"
+              "Federated": "arn:{{ required "awsPartition from aws-crossplane-cluster-config-operator is not filled yet" $.Values.awsPartition }}:iam::{{ required "accountID from aws-crossplane-cluster-config-operator is not filled yet" $.Values.accountID }}:oidc-provider/{{ $oidcDomain }}"
             },
             "Action": "sts:AssumeRoleWithWebIdentity",
             "Condition": {
               "StringLike": {
-                "irsa.{{ .Values.baseDomain }}:sub": "system:serviceaccount:*:*external-dns*"
+                "{{ $oidcDomain }}:sub": "system:serviceaccount:*:*external-dns*"
               }
             }
           }
+          {{- end }}
         ]
       }
     inlinePolicy:
@@ -40,7 +43,7 @@ spec:
               {
                 "Action": "route53:ChangeResourceRecordSets",
                 "Resource": [
-                  "arn:aws:route53:::hostedzone/*"
+                  "arn:{{ required "awsPartition from aws-crossplane-cluster-config-operator is not filled yet" $.Values.awsPartition }}:route53:::hostedzone/*"
                 ],
                 "Effect": "Allow"
               },

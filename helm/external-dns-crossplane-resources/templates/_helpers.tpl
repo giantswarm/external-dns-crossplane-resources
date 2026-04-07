@@ -33,3 +33,14 @@ giantswarm.io/managed-by: {{ .Release.Name | quote }}
 giantswarm.io/cluster: {{ .Values.clusterName | quote }}
 helm.sh/chart: {{ include "chart" . | quote }}
 {{- end -}}
+
+{{/*
+Get list of all provided OIDC domains
+*/}}
+{{- define "oidcDomains" -}}
+{{- $oidcDomains := list .Values.oidcDomain -}}
+{{- if .Values.oidcDomains -}}
+{{- $oidcDomains = concat $oidcDomains .Values.oidcDomains -}}
+{{- end -}}
+{{- compact $oidcDomains | uniq | toJson -}}
+{{- end -}}

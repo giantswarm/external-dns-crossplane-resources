@@ -2,3 +2,6 @@
 clusterName: ""
 accountID: ""
 baseDomain: ""
+awsPartition: ""
+oidcDomain: ""
+oidcDomains: []
