@@ -5,4 +5,7 @@ home: https://github.com/giantswarm/external-dns-crossplane-resources
 icon: https://s.giantswarm.io/app-icons/crossplane/1/dark.svg
 version: 0.1.6
 annotations:
+  io.giantswarm.application.audience: giantswarm
+  io.giantswarm.application.managed: "true"
   io.giantswarm.application.team: cabbage
+  io.giantswarm.application.restrictions.compatible-providers: "aws"
