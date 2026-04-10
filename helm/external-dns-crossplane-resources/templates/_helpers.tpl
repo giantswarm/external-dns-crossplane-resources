@@ -35,6 +35,20 @@ helm.sh/chart: {{ include "chart" . | quote }}
 {{- end -}}
 
 {{/*
+AWS partition, required to be set by aws-crossplane-cluster-config-operator
+*/}}
+{{- define "awsPartition" -}}
+{{- required "awsPartition from aws-crossplane-cluster-config-operator is not filled yet" .Values.awsPartition -}}
+{{- end -}}
+
+{{/*
+AWS account ID, required to be set by aws-crossplane-cluster-config-operator
+*/}}
+{{- define "accountID" -}}
+{{- required "accountID from aws-crossplane-cluster-config-operator is not filled yet" .Values.accountID -}}
+{{- end -}}
+
+{{/*
 Get list of all provided OIDC domains
 */}}
 {{- define "oidcDomains" -}}
