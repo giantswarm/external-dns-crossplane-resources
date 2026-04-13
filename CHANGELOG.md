@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-04-13
+
 ### Added
 
 - Add `awsPartition` value to support non-standard AWS partitions (e.g. China).
@@ -50,7 +52,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - changed: `app.giantswarm.io` label group was changed to `application.giantswarm.io`
 
-[Unreleased]: https://github.com/giantswarm/external-dns-crossplane-resources/compare/v0.1.6...HEAD
+[Unreleased]: https://github.com/giantswarm/external-dns-crossplane-resources/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/giantswarm/external-dns-crossplane-resources/compare/v0.1.6...v0.2.0
 [0.1.6]: https://github.com/giantswarm/external-dns-crossplane-resources/compare/v0.1.5...v0.1.6
 [0.1.5]: https://github.com/giantswarm/external-dns-crossplane-resources/compare/v0.1.4...v0.1.5
 [0.1.4]: https://github.com/giantswarm/external-dns-crossplane-resources/compare/v0.1.3...v0.1.4
