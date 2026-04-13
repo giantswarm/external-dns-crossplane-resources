@@ -7,10 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add `awsPartition` value to support non-standard AWS partitions (e.g. China).
+- Add `oidcDomain` and `oidcDomains` values to support multiple OIDC providers; the IAM trust policy now iterates over all provided domains.
+- Add `managed-by: external-dns-crossplane-resources` tag to the IAM role.
+
 ### Changed
 
 - Add `io.giantswarm.application.audience: giantswarm` annotation.
 - Migrate chart metadata annotations to `io.giantswarm.application.*` format.
+- Move `required` validation for `awsPartition` and `accountID` into named template helpers.
+- Replace deprecated `app.giantswarm.io/branch`, `application.kubernetes.io/managed-by`, and `giantswarm.io/service-type` labels with `app.kubernetes.io/*` equivalents.
+- Update chart description, icon, and owning team (`cabbage`).
+
+### Removed
+
+- Remove `name`, `serviceType`, `project.branch`, and `project.commit` values that were leftover hackathon scaffolding.
+- Remove hardcoded `baseDomain`-based OIDC provider URL; replaced by `oidcDomain`/`oidcDomains`.
 
 ## [0.1.6] - 2025-04-10
 

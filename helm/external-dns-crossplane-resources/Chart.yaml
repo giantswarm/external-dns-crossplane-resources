@@ -1,16 +1,11 @@
 apiVersion: v2
-appVersion: 0.0.1
-# Please make sure your name DOES NOT end in "app" or "-app".
 name: external-dns-crossplane-resources
-# Please describe what the app provides in a sentence or two.
-description: Crossplane Resources for External DNS
+description: Crossplane IAM resources for external-dns Route53 access on CAPA clusters
 home: https://github.com/giantswarm/external-dns-crossplane-resources
-icon: https://s.giantswarm.io/app-icons/aws/2/light.svg
-sources:
-  - https://github.com/giantswarm/external-dns-crossplane-resources
+icon: https://s.giantswarm.io/app-icons/crossplane/1/dark.svg
 version: 0.1.6
 annotations:
   io.giantswarm.application.audience: giantswarm
   io.giantswarm.application.managed: "true"
-  io.giantswarm.application.team: phoenix
+  io.giantswarm.application.team: cabbage
   io.giantswarm.application.restrictions.compatible-providers: "aws"

@@ -1,33 +1,37 @@
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
-  name: {{.Values.clusterName}}-external-dns
-  namespace: {{.ReleaseNamespace}}
+  name: {{ .Values.clusterName }}-external-dns
+  namespace: {{ .Release.Namespace }}
   labels:
-      {{- include "labels.common" . | nindent 4 }}
+    {{- include "labels.common" . | nindent 4 }}
 spec:
   providerConfigRef:
-    name: {{.Values.clusterName}}
+    name: {{ .Values.clusterName }}
   forProvider:
     tags:
-      giantswarm.io/cluster: {{.Values.clusterName}}
-      sigs.k8s.io/cluster-api-provider-aws/cluster/{{.Values.clusterName}}: owned
+      giantswarm.io/cluster: {{ .Values.clusterName }}
+      managed-by: "external-dns-crossplane-resources"
+      sigs.k8s.io/cluster-api-provider-aws/cluster/{{ .Values.clusterName }}: owned
     assumeRolePolicy: |
       {
         "Version": "2012-10-17",
         "Statement": [
-          {
+          {{- $oidcDomains := include "oidcDomains" . | fromJsonArray -}}
+          {{- range $index, $oidcDomain := $oidcDomains -}}
+          {{- if not (eq $index 0) }}, {{ end }}{
             "Effect": "Allow",
             "Principal": {
-              "Federated": "arn:aws:iam::{{.Values.accountID}}:oidc-provider/irsa.{{.Values.baseDomain}}"
+              "Federated": "arn:{{ include "awsPartition" $ }}:iam::{{ include "accountID" $ }}:oidc-provider/{{ $oidcDomain }}"
             },
             "Action": "sts:AssumeRoleWithWebIdentity",
             "Condition": {
               "StringLike": {
-                "irsa.{{.Values.baseDomain}}:sub": "system:serviceaccount:*:*external-dns*"
+                "{{ $oidcDomain }}:sub": "system:serviceaccount:*:*external-dns*"
               }
             }
           }
+          {{- end }}
         ]
       }
     inlinePolicy:
@@ -39,7 +43,7 @@ spec:
               {
                 "Action": "route53:ChangeResourceRecordSets",
                 "Resource": [
-                  "arn:aws:route53:::hostedzone/*"
+                  "arn:{{ include "awsPartition" $ }}:route53:::hostedzone/*"
                 ],
                 "Effect": "Allow"
               },
