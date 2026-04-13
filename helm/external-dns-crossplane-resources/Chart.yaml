@@ -3,7 +3,7 @@ name: external-dns-crossplane-resources
 description: Crossplane IAM resources for external-dns Route53 access on CAPA clusters
 home: https://github.com/giantswarm/external-dns-crossplane-resources
 icon: https://s.giantswarm.io/app-icons/crossplane/1/dark.svg
-version: 0.1.6
+version: 0.2.0
 annotations:
   io.giantswarm.application.audience: giantswarm
   io.giantswarm.application.managed: "true"
