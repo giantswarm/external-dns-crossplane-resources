@@ -1,0 +1,53 @@
+{{- if eq .Values.provider "aks" }}
+apiVersion: crossplane.giantswarm.io
+kind: WorloadIdentity
+metadata:
+  name: {{ .Values.clusterName }}-external-dns
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "labels.common" . | nindent 4 }}
+spec:
+  clusterName: {{ .Values.clusterName }}
+  provider: {{ .Values.provider }}
+  location: {{ .Values.azure.location }}
+  resourceGroupName: {{ .Values.clusterName }}
+  subject: system:serviceaccount:{{ .Release.Namespace }}:external-dns
+  subscriptionId: {{ .Values.azure.subscriptionID }}
+  template: |
+    env:
+    - name: AZURE_CLIENT_ID
+      valueFrom:
+        configMapKeyRef:
+          key: clientID
+          name: {{.Values.clusterName}}-external-dns-identity
+    - name: AZURE_TENANT_ID
+      valueFrom:
+        configMapKeyRef:
+          key: tenantID
+          name: {{.Values.clusterName}}-external-dns-identity
+    extraVolumes:
+    - name: azure-identity-token
+      projected:
+        defaultMode: 420
+        sources:
+          - serviceAccountToken:
+              audience: api://AzureADTokenExchange
+              expirationSeconds: 3600
+              path: azure-identity
+    extraVolumeMounts:
+      - mountPath: /var/run/secrets/azure/tokens/azure-identity-token
+        name: azure-identity-token
+        readOnly: true
+    secretConfiguration:
+      data:
+        azure.json: |-
+          {
+            "clientId": "${clientID}",
+            "subscriptionId": {{ .Values.azure.subscriptionID | quote }},
+            "resourceGroupName": {{ .Values.clusterName | quote }},
+            "useWorkloadIdentityExtension": true
+          }
+      enabled: true
+      mountPath: /etc/kubernetes
+      subPath: azure.json
+{{- end }}

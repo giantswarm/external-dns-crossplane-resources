@@ -5,3 +5,7 @@ baseDomain: ""
 awsPartition: ""
 oidcDomain: ""
 oidcDomains: []
+
+azure:
+  subscriptionID: ""
+  location: ""

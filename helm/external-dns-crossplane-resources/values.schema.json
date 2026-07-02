@@ -22,6 +22,17 @@
             "items": {
                 "type": "string"
             }
+        },
+        "azure": {
+            "type": "object",
+            "properties": {
+                "subscriptionID": {
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                }
+            }
         }
     }
 }
