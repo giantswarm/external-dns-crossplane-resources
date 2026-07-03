@@ -12,7 +12,7 @@ spec:
   location: {{ .Values.azure.location }}
   resourceGroupName: {{ .Values.clusterName }}
   subject: system:serviceaccount:{{ .Release.Namespace }}:external-dns
-  subscriptionId: {{ .Values.azure.subscriptionID }}
+  subscriptionID: {{ .Values.azure.subscriptionID }}
   template: |
     env:
     - name: AZURE_CLIENT_ID
