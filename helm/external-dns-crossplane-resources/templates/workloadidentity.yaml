@@ -1,5 +1,5 @@
 {{- if eq .Values.provider "aks" }}
-apiVersion: crossplane.giantswarm.io
+apiVersion: crossplane.giantswarm.io/v1alpha1
 kind: WorkloadIdentity
 metadata:
   name: {{ .Values.clusterName }}-external-dns
