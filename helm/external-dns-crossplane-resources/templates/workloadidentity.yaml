@@ -16,7 +16,7 @@ spec:
   template: |
     env:
     - name: AZURE_FEDERATED_TOKEN_FILE
-      value: /var/run/secrets/azure/tokens/identity-token
+      value: /var/run/secrets/azure/tokens/azure-identity
     - name: AZURE_AUTHORITY_HOST
       value: https://login.microsoftonline.com/
     - name: AZURE_CLIENT_ID
@@ -37,7 +37,7 @@ spec:
           - serviceAccountToken:
               audience: api://AzureADTokenExchange
               expirationSeconds: 3600
-              path: identity-token
+              path: azure-identity
     extraVolumeMounts:
       - mountPath: /var/run/secrets/azure/tokens
         name: azure-identity-token
