@@ -51,5 +51,4 @@ spec:
           }
       enabled: true
       mountPath: /etc/kubernetes
-      subPath: azure.json
 {{- end }}
