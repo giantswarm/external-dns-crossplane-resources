@@ -51,6 +51,7 @@ spec:
             "clientId": "${clientID}",
             "subscriptionId": {{ .Values.azure.subscriptionID | quote }},
             "resourceGroup": {{ .Values.clusterName | quote }},
+            "resourceGroupName": {{ .Values.clusterName | quote }},
             "useWorkloadIdentityExtension": true
           }
       enabled: true
