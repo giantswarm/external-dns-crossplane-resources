@@ -17,14 +17,14 @@ spec:
     env:
     - name: AZURE_CLIENT_ID
       valueFrom:
-        configMapKeyRef:
+        secretKeyRef:
           key: clientID
-          name: {{.Values.clusterName}}-external-dns-identity
+          name: external-dns
     - name: AZURE_TENANT_ID
       valueFrom:
-        configMapKeyRef:
+        secretKeyRef:
           key: tenantID
-          name: {{.Values.clusterName}}-external-dns-identity
+          name: external-dns
     extraVolumes:
     - name: azure-identity-token
       projected:
@@ -40,6 +40,8 @@ spec:
         readOnly: true
     secretConfiguration:
       data:
+        clientID: "${clientID}"
+        tenantID: "${tenantID}"
         azure.json: |-
           {
             "clientId": "${clientID}",
