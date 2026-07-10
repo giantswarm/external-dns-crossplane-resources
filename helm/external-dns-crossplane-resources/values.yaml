@@ -11,5 +11,6 @@ oidcDomain: ""
 oidcDomains: []
 
 azure:
-  subscriptionID: ""
   location: ""
+  resourceGroupName: ""
+  subscriptionID: ""

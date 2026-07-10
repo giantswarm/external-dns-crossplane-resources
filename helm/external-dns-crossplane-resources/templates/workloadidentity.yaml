@@ -10,7 +10,7 @@ spec:
   clusterName: {{ .Values.clusterName }}
   provider: {{ .Values.provider }}
   location: {{ .Values.azure.location }}
-  resourceGroupName: {{ .Values.clusterName }}
+  resourceGroupName: {{ include "azure.resourceGroupName" . }}
   subject: system:serviceaccount:kube-system:external-dns
   subscriptionID: {{ .Values.azure.subscriptionID }}
   template: |
@@ -22,8 +22,8 @@ spec:
           {
             "clientId": "${clientID}",
             "subscriptionId": {{ .Values.azure.subscriptionID | quote }},
-            "resourceGroup": {{ .Values.clusterName | quote }},
-            "resourceGroupName": {{ .Values.clusterName | quote }},
+            "resourceGroup": {{ include "azure.resourceGroupName" . | quote }},
+            "resourceGroupName": {{ include "azure.resourceGroupName" . | quote }},
             "useWorkloadIdentityExtension": true
           }
       enabled: true

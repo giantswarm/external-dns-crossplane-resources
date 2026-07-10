@@ -26,10 +26,13 @@
         "azure": {
             "type": "object",
             "properties": {
-                "subscriptionID": {
+                "location": {
                     "type": "string"
                 },
-                "location": {
+                "resourceGroupName": {
+                    "type": "string"
+                },
+                "subscriptionID": {
                     "type": "string"
                 }
             }
