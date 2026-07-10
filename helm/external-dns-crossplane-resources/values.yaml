@@ -1,3 +1,7 @@
+# This chart was initially only used by the aws provider and did not contain any provider selection.
+# Defaulting to `aws` safeguards against resources being removed due to missing new configuration.
+provider: aws
+
 # Values are inlined by cluster-aws in the HelmRelease spec
 clusterName: ""
 accountID: ""
