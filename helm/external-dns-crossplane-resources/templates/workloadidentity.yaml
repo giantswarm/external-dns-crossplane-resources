@@ -1,0 +1,31 @@
+{{- if eq .Values.provider "aks" }}
+apiVersion: crossplane.giantswarm.io/v1alpha1
+kind: WorkloadIdentity
+metadata:
+  name: {{ .Values.clusterName }}-external-dns
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "labels.common" . | nindent 4 }}
+spec:
+  clusterName: {{ .Values.clusterName }}
+  provider: {{ .Values.provider }}
+  location: {{ .Values.azure.location }}
+  resourceGroupName: {{ include "azure.resourceGroupName" . }}
+  subject: system:serviceaccount:kube-system:external-dns
+  subscriptionID: {{ .Values.azure.subscriptionID }}
+  template: |
+    secretConfiguration:
+      data:
+        clientID: "${clientID}"
+        tenantID: "${tenantID}"
+        azure.json: |-
+          {
+            "clientId": "${clientID}",
+            "subscriptionId": {{ .Values.azure.subscriptionID | quote }},
+            "resourceGroup": {{ include "azure.resourceGroupName" . | quote }},
+            "resourceGroupName": {{ include "azure.resourceGroupName" . | quote }},
+            "useWorkloadIdentityExtension": true
+          }
+      enabled: true
+      mountPath: /etc/kubernetes
+{{- end }}

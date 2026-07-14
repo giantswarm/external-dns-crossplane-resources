@@ -58,3 +58,10 @@ Get list of all provided OIDC domains
 {{- end -}}
 {{- compact $oidcDomains | uniq | toJson -}}
 {{- end -}}
+
+{{/*
+Determine the resource group name to use.
+*/}}
+{{- define "azure.resourceGroupName" -}}
+{{ .Values.azure.resourceGroupName | default .Values.clusterName }}
+{{- end -}}
