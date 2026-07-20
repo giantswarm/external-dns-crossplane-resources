@@ -35,26 +35,31 @@ helm.sh/chart: {{ include "chart" . | quote }}
 {{- end -}}
 
 {{/*
-AWS partition, required to be set by aws-crossplane-cluster-config-operator
+AWS partition, required to be set by aws-crossplane-cluster-config-operator.
+Prefers the scoped `aws.awsPartition`, falling back to the legacy root value.
 */}}
 {{- define "awsPartition" -}}
-{{- required "awsPartition from aws-crossplane-cluster-config-operator is not filled yet" .Values.awsPartition -}}
+{{- required "awsPartition from aws-crossplane-cluster-config-operator is not filled yet" (.Values.aws.awsPartition | default .Values.awsPartition) -}}
 {{- end -}}
 
 {{/*
-AWS account ID, required to be set by aws-crossplane-cluster-config-operator
+AWS account ID, required to be set by aws-crossplane-cluster-config-operator.
+Prefers the scoped `aws.accountID`, falling back to the legacy root value.
 */}}
 {{- define "accountID" -}}
-{{- required "accountID from aws-crossplane-cluster-config-operator is not filled yet" .Values.accountID -}}
+{{- required "accountID from aws-crossplane-cluster-config-operator is not filled yet" (.Values.aws.accountID | default .Values.accountID) -}}
 {{- end -}}
 
 {{/*
-Get list of all provided OIDC domains
+Get list of all provided OIDC domains.
+Prefers the scoped `aws.oidcDomain`/`aws.oidcDomains`, falling back to the legacy root values.
 */}}
 {{- define "oidcDomains" -}}
-{{- $oidcDomains := list .Values.oidcDomain -}}
-{{- if .Values.oidcDomains -}}
-{{- $oidcDomains = concat $oidcDomains .Values.oidcDomains -}}
+{{- $oidcDomain := .Values.aws.oidcDomain | default .Values.oidcDomain -}}
+{{- $oidcDomainsList := .Values.aws.oidcDomains | default .Values.oidcDomains -}}
+{{- $oidcDomains := list $oidcDomain -}}
+{{- if $oidcDomainsList -}}
+{{- $oidcDomains = concat $oidcDomains $oidcDomainsList -}}
 {{- end -}}
 {{- compact $oidcDomains | uniq | toJson -}}
 {{- end -}}
