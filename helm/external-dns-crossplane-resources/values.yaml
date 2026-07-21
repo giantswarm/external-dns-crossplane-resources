@@ -4,8 +4,16 @@ provider: aws
 
 # Values are inlined by cluster-aws in the HelmRelease spec
 clusterName: ""
-accountID: ""
+
 baseDomain: ""
+
+aws:
+  accountID: ""
+  awsPartition: ""
+  oidcDomain: ""
+  oidcDomains: []
+
+accountID: ""
 awsPartition: ""
 oidcDomain: ""
 oidcDomains: []

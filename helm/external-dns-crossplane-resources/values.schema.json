@@ -23,6 +23,26 @@
                 "type": "string"
             }
         },
+        "aws": {
+            "type": "object",
+            "properties": {
+                "accountID": {
+                    "type": "string"
+                },
+                "awsPartition": {
+                    "type": "string"
+                },
+                "oidcDomain": {
+                    "type": "string"
+                },
+                "oidcDomains": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
         "azure": {
             "type": "object",
             "properties": {
