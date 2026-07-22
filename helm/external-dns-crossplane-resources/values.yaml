@@ -5,7 +5,9 @@ provider: aws
 # Values are inlined by cluster-aws in the HelmRelease spec
 clusterName: ""
 
-baseDomain: ""
+serviceAccount:
+  name: external-dns
+  namespace: kube-system
 
 aws:
   accountID: ""
@@ -22,3 +24,4 @@ azure:
   location: ""
   resourceGroupName: ""
   subscriptionID: ""
+  mountPath: /etc/kubernetes

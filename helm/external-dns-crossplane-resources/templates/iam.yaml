@@ -2,7 +2,7 @@
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
-  name: {{ .Values.clusterName }}-external-dns
+  name: {{ include "resourceName" . }}
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "labels.common" . | nindent 4 }}
@@ -12,7 +12,7 @@ spec:
   forProvider:
     tags:
       giantswarm.io/cluster: {{ .Values.clusterName }}
-      managed-by: "external-dns-crossplane-resources"
+      managed-by: {{ include "name" . | quote }}
       sigs.k8s.io/cluster-api-provider-aws/cluster/{{ .Values.clusterName }}: owned
     assumeRolePolicy: |
       {
@@ -28,7 +28,7 @@ spec:
             "Action": "sts:AssumeRoleWithWebIdentity",
             "Condition": {
               "StringLike": {
-                "{{ $oidcDomain }}:sub": "system:serviceaccount:*:*external-dns*"
+                "{{ $oidcDomain }}:sub": "system:serviceaccount:{{ $.Values.serviceAccount.namespace }}:{{ $.Values.serviceAccount.name }}"
               }
             }
           }
@@ -36,7 +36,7 @@ spec:
         ]
       }
     inlinePolicy:
-      - name: external-dns-policy
+      - name: {{ .Values.serviceAccount.name }}-policy
         policy: |
           {
             "Version": "2012-10-17",

@@ -1,6 +1,6 @@
 apiVersion: v2
 name: external-dns-crossplane-resources
-description: Crossplane IAM resources for external-dns Route53 access on CAPA clusters
+description: Crossplane resources for external-dns DNS access on CAPA (Route53) and CAPZ (Workload Identity) clusters
 home: https://github.com/giantswarm/external-dns-crossplane-resources
 icon: https://s.giantswarm.io/app-icons/crossplane/1/dark.svg
 version: 0.3.0
@@ -8,4 +8,4 @@ annotations:
   io.giantswarm.application.audience: giantswarm
   io.giantswarm.application.managed: "true"
   io.giantswarm.application.team: cabbage
-  io.giantswarm.application.restrictions.compatible-providers: "aws"
+  io.giantswarm.application.restrictions.compatible-providers: "aws,azure"

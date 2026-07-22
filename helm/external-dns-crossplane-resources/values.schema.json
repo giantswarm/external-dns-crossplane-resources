@@ -2,17 +2,29 @@
     "$schema": "http://json-schema.org/schema#",
     "type": "object",
     "properties": {
+        "provider": {
+            "type": "string",
+            "enum": ["aws", "aks", "azure"]
+        },
         "accountID": {
             "type": "string"
         },
         "awsPartition": {
             "type": "string"
         },
-        "baseDomain": {
-            "type": "string"
-        },
         "clusterName": {
             "type": "string"
+        },
+        "serviceAccount": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "namespace": {
+                    "type": "string"
+                }
+            }
         },
         "oidcDomain": {
             "type": "string"
@@ -53,6 +65,9 @@
                     "type": "string"
                 },
                 "subscriptionID": {
+                    "type": "string"
+                },
+                "mountPath": {
                     "type": "string"
                 }
             }
