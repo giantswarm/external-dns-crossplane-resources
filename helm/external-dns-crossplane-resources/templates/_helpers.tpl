@@ -14,6 +14,13 @@ Create chart name and version as used by the chart label.
 {{- end -}}
 
 {{/*
+Name of the crossplane resource for external-dns.
+*/}}
+{{- define "resourceName" -}}
+{{ .Values.clusterName }}-{{ .Values.serviceAccount.name }}
+{{- end -}}
+
+{{/*
 Selector labels
 */}}
 {{- define "labels.selector" -}}

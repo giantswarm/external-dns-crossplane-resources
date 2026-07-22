@@ -7,9 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add configurable `serviceAccount.name`/`serviceAccount.namespace` and `azure.mountPath` values.
+
 ### Changed
 
 - Scope AWS values under `aws.*`. Root-level values remain supported as a fallback for backward compatibility.
+- Templatize hardcoded resource, service account and tag values.
+- Scope the IAM trust policy to the exact `serviceAccount` subject instead of a wildcard match.
+- Update chart metadata to reflect Azure support.
+
+### Removed
+
+- Remove unused `baseDomain` value.
 
 ## [0.3.0] - 2026-07-15
 
