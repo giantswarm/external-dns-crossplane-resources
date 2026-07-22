@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Scope AWS values under `aws.*`. Root-level values remain supported as a fallback for backward compatibility.
 - Templatize hardcoded resource, service account and tag values.
 - Scope the IAM trust policy to the exact `serviceAccount` subject instead of a wildcard match.
+- Enable Azure Workload Identity for the `azure` provider in addition to `aks`.
 - Update chart metadata to reflect Azure support.
 
 ### Removed

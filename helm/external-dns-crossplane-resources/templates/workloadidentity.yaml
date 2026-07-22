@@ -1,4 +1,4 @@
-{{- if eq .Values.provider "aks" }}
+{{- if or (eq .Values.provider "aks") (eq .Values.provider "azure") }}
 apiVersion: crossplane.giantswarm.io/v1alpha1
 kind: WorkloadIdentity
 metadata:
