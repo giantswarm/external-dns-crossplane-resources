@@ -2,3 +2,4 @@ replace-chart-version-with-git: true
 generate-metadata: true
 chart-dir: ./helm/external-dns-crossplane-resources
 destination: ./build
+helm-template-extra-values: helm/external-dns-crossplane-resources/ci/ci-values.yaml

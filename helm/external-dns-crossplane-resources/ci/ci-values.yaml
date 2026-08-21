@@ -1,0 +1,7 @@
+# Values used by CI to render the chart. The AWS values are required by the
+# templates and are normally filled in by aws-crossplane-cluster-config-operator.
+clusterName: test
+aws:
+  accountID: "123456789012"
+  awsPartition: aws
+  oidcDomain: irsa.test.example.com
