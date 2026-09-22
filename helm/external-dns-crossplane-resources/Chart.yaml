@@ -9,3 +9,7 @@ annotations:
   io.giantswarm.application.managed: "true"
   io.giantswarm.application.team: cabbage
   io.giantswarm.application.restrictions.compatible-providers: "aws,azure"
+keywords:
+  - dns
+  - external-dns
+  - crossplane
