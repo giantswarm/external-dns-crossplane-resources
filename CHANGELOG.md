@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Update architect to v10.12.0 (giantswarm/external-dns-crossplane-resources#82)
+
 ### Added
 
 - Chart metadata: add `keywords`.
