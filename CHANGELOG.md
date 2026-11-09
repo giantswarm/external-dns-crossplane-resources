@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Chart metadata: add `keywords`.
 - Add CI values file so the chart renders during the build validation.
+- Add `aws.managedDomain` to limit Route53 record changes to that domain and its subdomains.
 
 ## [0.4.0] - 2026-07-22
 

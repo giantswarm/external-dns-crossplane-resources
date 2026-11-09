@@ -46,6 +46,17 @@ spec:
                 "Resource": [
                   "arn:{{ include "awsPartition" $ }}:route53:::hostedzone/*"
                 ],
+                {{- with .Values.aws.managedDomain }}
+                {{- $domain := . | lower | trimSuffix "." }}
+                "Condition": {
+                  "ForAllValues:StringLike": {
+                    "route53:ChangeResourceRecordSetsNormalizedRecordNames": [
+                      "{{ $domain }}",
+                      "*.{{ $domain }}"
+                    ]
+                  }
+                },
+                {{- end }}
                 "Effect": "Allow"
               },
               {
