@@ -1,6 +1,6 @@
 # This chart was initially only used by the aws provider and did not contain any provider selection.
 # Defaulting to `aws` safeguards against resources being removed due to missing new configuration.
-provider: aws
+provider: aws  # @schema enum: [aws, aks, azure]
 
 # Values are inlined by cluster-aws in the HelmRelease spec
 clusterName: ""
@@ -13,7 +13,7 @@ aws:
   accountID: ""
   awsPartition: ""
   oidcDomain: ""
-  oidcDomains: []
+  oidcDomains: []  # @schema item: string
   # DNS domain the external-dns instance manages. Record changes are limited to this domain
   # and its subdomains. Empty allows changes in every hosted zone of the account.
   managedDomain: ""
@@ -21,7 +21,12 @@ aws:
 accountID: ""
 awsPartition: ""
 oidcDomain: ""
-oidcDomains: []
+oidcDomains: []  # @schema item: string
+
+# Also set by the cluster charts and aws-crossplane-cluster-config-operator, unused by this chart.
+awsRegion: ""
+region: ""
+awsCluster: {}  # @schema skipProperties: true; additionalProperties: true
 
 azure:
   location: ""

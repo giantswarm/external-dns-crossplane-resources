@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Values schema: accept the region and AWS cluster values the cluster charts pass, and restrict `provider` and the OIDC domain lists to their valid values.
+
 ## [0.5.0] - 2026-11-10
 
 ### Fixed
