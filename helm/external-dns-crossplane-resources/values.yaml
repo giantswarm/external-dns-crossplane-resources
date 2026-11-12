@@ -23,7 +23,6 @@ awsPartition: ""
 oidcDomain: ""
 oidcDomains: []  # @schema item: string
 
-# Also set by the cluster charts and aws-crossplane-cluster-config-operator, unused by this chart.
 awsRegion: ""
 region: ""
 awsCluster: {}  # @schema skipProperties: true; additionalProperties: true
