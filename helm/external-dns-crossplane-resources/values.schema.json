@@ -35,6 +35,15 @@
                 "type": "string"
             }
         },
+        "awsRegion": {
+            "type": "string"
+        },
+        "region": {
+            "type": "string"
+        },
+        "awsCluster": {
+            "type": "object"
+        },
         "aws": {
             "type": "object",
             "properties": {
